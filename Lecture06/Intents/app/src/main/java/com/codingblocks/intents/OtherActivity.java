@@ -12,6 +12,7 @@ public class OtherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_other);
 
         String dataReceived = getIntent().getStringExtra("data");
+        int result = getIntent().getIntExtra("result", 0);
         ((TextView) findViewById(R.id.tv_other)).setText(dataReceived);
 
 

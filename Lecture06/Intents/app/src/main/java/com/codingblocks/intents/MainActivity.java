@@ -26,10 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
                 String dataToSend = etMain.getText().toString();
 
-                Intent i = new Intent(MainActivity.this, OtherActivity.class);
-                i.putExtra("data", dataToSend);
+//                Intent i = new Intent(MainActivity.this, OtherActivity.class);
+//                i.putExtra("data", dataToSend);
+//                i.putExtra("result", 10);
+//                startActivity(i);
+//                finish();
+
+                Intent i = new Intent(MainActivity.this, NewIntentExampleActivity.class);
                 startActivity(i);
-                finish();
 
             }
         });
