@@ -37,15 +37,14 @@ public class Course2Fragment extends Fragment {
      * @param language
      * @return
      */
-    public static Course2Fragment newInstance(String name,
-                                              String teacher, String language) {
+    public static Course2Fragment newInstance(Course c) {
 
         Course2Fragment fragment = new Course2Fragment();
 
         Bundle args = new Bundle();
-        args.putString(ARG_LANGUAGE, language);
-        args.putString(ARG_NAME, name);
-        args.putString(ARG_TEACHER, teacher);
+        args.putString(ARG_LANGUAGE, c.getLanguage());
+        args.putString(ARG_NAME, c.getName());
+        args.putString(ARG_TEACHER, c.getTeacher());
 
         fragment.setArguments(args);
         return fragment;
