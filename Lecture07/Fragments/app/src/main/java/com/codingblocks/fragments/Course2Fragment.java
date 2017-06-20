@@ -21,6 +21,16 @@ public class Course2Fragment extends Fragment {
     public static final String ARG_LANGUAGE = "language";
     public static final String ARG_CID = "courseId";
 
+    interface OnStudentAddListener {
+        void addStudent(int cid);
+    }
+
+    private OnStudentAddListener osal;
+
+    public void setOnStudentAddListener (OnStudentAddListener osal) {
+        this.osal = osal;
+    }
+
 
     private String courseName = "Sample Course";
     private String courseTeacher = "Sample Teacher";
@@ -34,8 +44,11 @@ public class Course2Fragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static Course2Fragment newInstance (Course c, int cId) {
+        return newInstance(c, cId, null);
+    }
 
-    public static Course2Fragment newInstance(Course c, int cId) {
+    public static Course2Fragment newInstance(Course c, int cId, OnStudentAddListener osal) {
 
         Course2Fragment fragment = new Course2Fragment();
 
@@ -46,6 +59,7 @@ public class Course2Fragment extends Fragment {
         args.putInt(ARG_CID, cId);
 
         fragment.setArguments(args);
+        fragment.setOnStudentAddListener(osal);
         return fragment;
     }
 
@@ -78,7 +92,9 @@ public class Course2Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // increment admissions[courseId] which is in MainActivity
-                ((MainActivity) getActivity()).addStudent(courseId);
+                if (osal != null) {
+                    osal.addStudent(courseId);
+                }
             }
         });
 

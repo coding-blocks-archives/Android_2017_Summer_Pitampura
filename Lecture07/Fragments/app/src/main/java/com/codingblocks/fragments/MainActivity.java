@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void addStudent(int cid) {
+    private void incrementStudentCount(int cid) {
         switch (cid) {
             case 0:
                 tvSc0.setText(String.valueOf(
