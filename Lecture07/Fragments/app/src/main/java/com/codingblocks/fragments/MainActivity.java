@@ -26,31 +26,35 @@ public class MainActivity extends AppCompatActivity {
         btn3 = (Button) findViewById(R.id.btn3);
 
         final FragmentManager fragMan = getSupportFragmentManager();
-        final CourseFragment c1Frag = new CourseFragment();
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Course2Fragment cFrag = Course2Fragment.newInstance(
+//                        "Pandora",
+//                        "Arnav",
+//                        "Java"
+//                );
 
                 fragMan.beginTransaction()
-                        .replace(R.id.fragContainer, c1Frag)
+                        .replace(R.id.fragContainer, new Course2Fragment())
                         .commit();
 
             }
         });
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                c1Frag.setData(
-                        "Pandora",
-                        "Arnav",
-                        "Java"
-                );
-            }
-        });
+//        btn2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//                c1Frag.setData(
+//                        "Pandora",
+//                        "Arnav",
+//                        "Java"
+//                );
+//            }
+//        });
 
 
     }
