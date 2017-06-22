@@ -27,5 +27,10 @@ public class MainActivity extends AppCompatActivity {
                         );
                     }
                 });
+
+        viewPager.setAdapter(new MyFragmentPagerAdapter(
+                getSupportFragmentManager(),
+                10
+        ));
     }
 }
