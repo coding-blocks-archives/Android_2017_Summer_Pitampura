@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
+
         ((Button) findViewById(R.id.btnTabAct))
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
