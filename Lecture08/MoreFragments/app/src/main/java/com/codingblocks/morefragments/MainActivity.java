@@ -32,5 +32,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager(),
                 10
         ));
+        viewPager.setOffscreenPageLimit(3);
     }
 }
