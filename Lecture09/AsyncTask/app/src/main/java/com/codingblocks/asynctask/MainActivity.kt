@@ -1,14 +1,10 @@
 package com.codingblocks.asynctask
 
-import android.content.DialogInterface
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-
-import kotlinx.android.synthetic.main.activity_main.*;
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +13,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        var myTv : TextView = findViewById(R.id.tvResult) as TextView;
 
 
         button.setOnClickListener {
@@ -30,7 +28,11 @@ class MainActivity : AppCompatActivity() {
             tvResult.text = "SOME TEXT";
 
             var myStr: String = tvResult.text as String;
+
+//            myTv!!.setText("SOMETHING");
+
         }
+
 
     }
 
@@ -40,3 +42,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
