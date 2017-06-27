@@ -44,10 +44,10 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
 
             StringBuilder sb = new StringBuilder();
             String buffer = "";
-            while (buffer != null) {
-                buffer = br.readLine();
+            do  {
                 sb.append(buffer);
-            }
+                buffer = br.readLine();
+            } while (buffer != null);
 
             result = sb.toString();
 
