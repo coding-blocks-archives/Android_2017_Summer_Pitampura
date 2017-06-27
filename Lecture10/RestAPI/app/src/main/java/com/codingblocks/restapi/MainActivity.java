@@ -1,5 +1,6 @@
 package com.codingblocks.restapi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this
         );
         rvListPost.setAdapter(postsAdapter);
+        postsAdapter.setOnItemClickListener(new PostsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(int pos) {
+                Intent i = new Intent(MainActivity.this, PostCommentActivity.class);
+                i.putExtra("postId", pos);
+                startActivity(i);
+            }
+        });
 
 
         btnDownload.setOnClickListener(new View.OnClickListener() {

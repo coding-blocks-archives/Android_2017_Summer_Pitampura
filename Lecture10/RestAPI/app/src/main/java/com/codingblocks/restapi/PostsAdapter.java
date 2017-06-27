@@ -18,6 +18,15 @@ public class PostsAdapter
 
     private ArrayList<Post> postList;
     private Context context;
+    private OnItemClickListener onItemClickListener;
+
+    interface OnItemClickListener {
+        void onItemClicked(int pos);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public PostsAdapter(ArrayList<Post> postList, Context context) {
         this.postList = postList;
@@ -41,9 +50,20 @@ public class PostsAdapter
     }
 
     @Override
-    public void onBindViewHolder(PostViewHolder holder, int position) {
-        holder.tvTitle.setText(postList.get(position).getTitle());
-        holder.tvBody.setText(postList.get(position).getBody());
+    public void onBindViewHolder(PostViewHolder holder, final int position) {
+        final Post thisPost = postList.get(position);
+
+        holder.tvTitle.setText(thisPost.getTitle());
+        holder.tvBody.setText(thisPost.getBody());
+        holder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClicked(thisPost.getId());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -54,10 +74,12 @@ public class PostsAdapter
     class PostViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvBody;
+        View rootView;
         public PostViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+            rootView = itemView;
         }
     }
 
