@@ -2,6 +2,8 @@ package com.codingblocks.restapi;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "REST";
 
     Button btnDownload;
+    RecyclerView rvListPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnDownload = (Button) findViewById(R.id.btnDownload);
+        rvListPost = (RecyclerView) findViewById(R.id.listPosts);
+        rvListPost.setLayoutManager(new LinearLayoutManager(this));
+        final PostsAdapter postsAdapter = new PostsAdapter(
+                new ArrayList<Post>(),
+                MainActivity.this
+        );
+        rvListPost.setAdapter(postsAdapter);
+
 
         btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,
                                 "posts downloaded = " + posts.size(),
                                 Toast.LENGTH_SHORT).show();
+
+                        postsAdapter.updatePostList(posts);
                     }
                 });
 
                 dTask.execute("http://jsonplaceholder.typicode.com/posts");
             }
         });
-
 
     }
 
