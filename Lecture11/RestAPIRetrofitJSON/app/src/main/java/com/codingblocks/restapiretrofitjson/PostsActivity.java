@@ -35,14 +35,8 @@ public class PostsActivity extends AppCompatActivity {
         postAdapter = new PostAdapter(this, new ArrayList<Post>());
         rvPostsList.setAdapter(postAdapter);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
-                .addConverterFactory(
-                        GsonConverterFactory.create()
-                )
-                .build();
 
-        PostsAPI postsAPI = retrofit.create(PostsAPI.class);
+        PostsAPI postsAPI = RestAPI.getInstance().getPostsAPI();
         Callback<ArrayList<Post>> postCallback = new Callback<ArrayList<Post>>() {
 
             @Override

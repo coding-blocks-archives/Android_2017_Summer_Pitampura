@@ -64,14 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
-                .addConverterFactory(
-                        GsonConverterFactory.create()
-                )
-                .build();
 
-        final UsersAPI usersAPI = retrofit.create(UsersAPI.class);
+        final UsersAPI usersAPI = RestAPI.getInstance().getUsersAPI();
 
         usersAPI.getUsers().enqueue(new Callback<ArrayList<User>>() {
             @Override
