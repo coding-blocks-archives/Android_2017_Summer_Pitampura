@@ -50,11 +50,12 @@ public class PostsActivity extends AppCompatActivity {
 
             }
         };
+
         int userIdReceived = getIntent().getIntExtra("userId", -1);
         if (userIdReceived != -1) {
-            postsAPI.getPostsByUserId(userIdReceived).enqueue(postCallback);
+            postsAPI.getPosts(userIdReceived).enqueue(postCallback);
         } else {
-            postsAPI.getPosts().enqueue(postCallback);
+            postsAPI.getPosts(null).enqueue(postCallback);
         }
 
     }

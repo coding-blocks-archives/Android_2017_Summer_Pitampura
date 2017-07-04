@@ -1,5 +1,7 @@
 package com.codingblocks.restapiretrofitjson.api;
 
+import android.support.annotation.Nullable;
+
 import com.codingblocks.restapiretrofitjson.models.Comment;
 import com.codingblocks.restapiretrofitjson.models.Post;
 
@@ -17,17 +19,20 @@ import retrofit2.http.Query;
 public interface PostsAPI {
 
     @GET("/posts")
-    Call<ArrayList<Post>> getPosts ();
+    Call<ArrayList<Post>> getPosts (
+            @Nullable
+            @Query("userId") Integer userId
+    );
 
     @GET("/posts/{id}")
     Call<Post> getPostById (
             @Path("id") int id
     );
 
-    @GET("/posts")
-    Call<ArrayList<Post>> getPostsByUserId (
-            @Query("userId") int userId
-    );
+//    @GET("/posts")
+//    Call<ArrayList<Post>> getPostsByUserId (
+//            @Query("userId") int userId
+//    );
 
     interface CommentsAPI {
 
