@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         final TextView tvAz = (TextView) findViewById(R.id.tvAz);
         final LinearLayout llActivityMain = (LinearLayout) findViewById(R.id.llActivityMain);
 
-        tvAx.setBackgroundColor(Color.rgb(0,0,255));
 
         SensorManager sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         SensorEventListener sel = new SensorEventListener() {
@@ -34,8 +33,15 @@ public class MainActivity extends AppCompatActivity {
                 tvAx.setText(String.valueOf(Math.ceil(sensorEvent.values[0])));
                 tvAy.setText(String.valueOf(Math.ceil(sensorEvent.values[1])));
                 tvAz.setText(String.valueOf(Math.ceil(sensorEvent.values[2])));
+                float[] v = sensorEvent.values;
 
-                llActivityMain.setBackgroundColor(0/* take values from ax, ay, az*/);
+                llActivityMain.setBackgroundColor(
+                        Color.rgb(
+                                a2c(v[0]),
+                                a2c(v[1]),
+                                a2c(v[2])
+                        )
+                );
             }
 
             @Override
@@ -54,5 +60,9 @@ public class MainActivity extends AppCompatActivity {
         Sensor accelSensor = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sm.registerListener(sel, accelSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
+    }
+
+    int a2c (float a) {
+        return (int) (((a + 12) / 24) * 255);
     }
 }
