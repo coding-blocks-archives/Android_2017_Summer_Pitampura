@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "PERM";
@@ -18,42 +19,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int permCode = ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        );
+        PermissionManager.askForPermission(this,
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }, new PermissionManager.OnPermissionResultListener() {
+                    @Override
+                    public void onGranted(String permission) {
+                        if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
-        if (permCode == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "onCreate: Permission Granted");
-            Log.d(TAG, "onCreate: We are writing a file here");
-        }
-        if (permCode == PackageManager.PERMISSION_DENIED) {
-            Log.d(TAG, "onCreate: Permissions Denied");
-            ActivityCompat.requestPermissions(this,
-                    new String[] {
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    },
-                    345
-                    );
-            Log.d(TAG, "onCreate: We are writing file after getting permission");
-        }
+                        }
+
+                        if (permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onDenied(String permission) {
+
+                    }
+                });
+
+    }
+
+    void writeFile () {
+        Log.d(TAG, "onCreate: We are writing a file here");
 
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
 
-        if (requestCode == 345) {
-            //means this was our request on line 32
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, "onRequestPermissionsResult: " + permissions[i] + " was granted");
-                }
-                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                    Log.d(TAG, "onRequestPermissionsResult: " + permissions[i] + " was denied");
-                }
-            }
-        }
+        PermissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
     }
 }
