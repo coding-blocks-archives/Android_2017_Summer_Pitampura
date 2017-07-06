@@ -23,7 +23,7 @@ public class PermissionManager {
     static void askForPermission(Activity act, String[] permissions,
                                  OnPermissionResultListener oprl) {
 
-        int reqCode = listenerList.size() + 1;
+        int reqCode = listenerList.size();
         listenerList.add(reqCode, oprl);
 
 
